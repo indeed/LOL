@@ -1,0 +1,91 @@
+﻿body {
+    background-color: #ccc;
+    color: #fff;
+}
+
+.blur {
+    animation-name: blur;
+    animation-duration: 2s;
+    filter: blur(12px);
+    -webkit-filter: blur(12px);
+}
+
+@keyframes blur {
+    from {
+        filter: blur(0px);
+        -webkit-filter: blur(0px);
+    }
+
+    to {
+        filter: blur(10px);
+        -webkit-filter: blur(10px);
+    }
+}
+
+.content {
+    position: absolute;
+    top: 16px;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    overflow: hidden;
+    border: 1px solid white;
+    background-color: rgba(0,0,0,0.3);
+    box-shadow: 0 0 0 16px rgba(0,0,0,0.3);
+    color: #fff;
+}
+
+.container {
+    display: table;
+    height: auto;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.text-light {
+    font-weight: 100;
+}
+
+.text-medium {
+    font-weight: 300;
+}
+
+.text-bold {
+    font-weight: 700;
+}
+
+.text-spacious {
+    letter-spacing: 0.6em;
+}
+
+.text-shadow {
+    text-shadow: 0 0 4px rgba(0,0,0,0.4);
+}
+
+button {
+    outline: none;
+    display: inline-block;
+    line-height: 0;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 0 4px rgba(0,0,0,0.2);
+    box-shadow: 0 0 4px rgba(0,0,0,0.4);
+    background-color: transparent;
+    border-radius: 0px;
+    border: 1px solid #fff;
+}
+
+.divider {
+    height: 35px;
+    width: 100%;
+    margin: 0px auto;
+    background: url(../img/divider.png) no-repeat scroll center transparent;
+    padding: 4px;
+}
