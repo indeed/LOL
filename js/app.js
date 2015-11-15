@@ -33,9 +33,7 @@ app.controller('titleCtrl', function ($scope, ngAudio) {
 
     $scope.bg = {
         resources: [
-            '/media/titlebg.webm',
-            '*.ogv',
-            '*.mp4',
+            'media/titlebg.webm',
         ],
         poster: 'http://placehold.it/2000&text=you%20may%20want%20to%20have%20a%20poster',
         fullScreen: true,
