@@ -14,6 +14,11 @@
     background-color: rgba(0,0,0,0.3);
     box-shadow: 0 0 0 16px rgba(0,0,0,0.3);
     color: #fff;
+    animation: fadeIn 2s;
+}
+
+#content.ng-hide {
+    animation: zoomOut 2s;
 }
 
 .container {
@@ -49,6 +54,7 @@ button {
   top: 16px;
   bottom: 8px;
   height: 100%;
+  font-size: 1.8rem;
 }
 
 .story-container.ng-hide {
@@ -57,6 +63,7 @@ button {
 
 .row.event {
     animation: fadeInDown 1s;
+    margin-top:8px;
 }
 
 .dialogue {
@@ -89,20 +96,31 @@ button {
 }
 
 .event .columns.your-action {
-    text-align: left !important;
+    text-align: right !important;
+    font-style: italic;
 }
 
 .event .columns.your-speech {
-    text-align: left !important;
+    text-align: right !important;
 }
 
 .event .columns.other-action {
-    text-align: right !important;
+    text-align: left !important;
+    font-style: italic;
 }
 
 .event .columns.other-speech {
-    text-align: right !important;
+    text-align: left !important;
 }
+
+.event .columns.divider {
+    height: 35px;
+    width: 100%;
+    margin: 10px auto;
+    background: url(../img/divider-small.png) no-repeat scroll center transparent;
+    animation: fadeInUp 2s !important;
+}
+
 
 .user-option {
     animation: fadeInDown .5s;
@@ -110,4 +128,12 @@ button {
 
 .user-option.ng-leave {
     animation: fadeOutDown .5s;
+}
+
+.bg-video {
+    animation: fadeIn 3s;
+}
+
+.bg-video.ng-hide {
+    animation: fadeOut 3s;
 }
