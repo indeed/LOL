@@ -1,0 +1,67 @@
+﻿
+.preload * {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
+}
+
+.blur {
+    animation-name: blur;
+    animation-duration: 2s;
+    filter: blur(12px);
+    -webkit-filter: blur(12px);
+}
+
+@keyframes blur {
+    from {
+        filter: blur(0px);
+        -webkit-filter: blur(0px);
+    }
+
+    to {
+        filter: blur(10px);
+        -webkit-filter: blur(10px);
+    }
+}
+
+.absolute-center {
+    display: table;
+    height: auto;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    right: 0;
+}
+
+.text-light {
+    font-weight: 100;
+}
+
+.text-medium {
+    font-weight: 300;
+}
+
+.text-bold {
+    font-weight: 700;
+}
+
+.text-spacious {
+    letter-spacing: 0.6em;
+}
+
+.text-shadow {
+    text-shadow: 0 0 4px rgba(0,0,0,0.4);
+}
+
+.divider {
+    height: 35px;
+    width: 100%;
+    margin: 0px auto;
+    background: url(../img/divider.png) no-repeat scroll center transparent;
+    padding: 4px;
+    animation: fadeIn 2s;
+}

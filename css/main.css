@@ -3,26 +3,7 @@
     color: #fff;
 }
 
-.blur {
-    animation-name: blur;
-    animation-duration: 2s;
-    filter: blur(12px);
-    -webkit-filter: blur(12px);
-}
-
-@keyframes blur {
-    from {
-        filter: blur(0px);
-        -webkit-filter: blur(0px);
-    }
-
-    to {
-        filter: blur(10px);
-        -webkit-filter: blur(10px);
-    }
-}
-
-.content {
+#content {
     position: absolute;
     top: 16px;
     bottom: 16px;
@@ -36,36 +17,7 @@
 }
 
 .container {
-    display: table;
-    height: auto;
-    margin: auto;
-    position: absolute;
-    top: 0;
-    bottom: 0;
     width: 100%;
-    left: 0;
-    right: 0;
-    text-align: center;
-}
-
-.text-light {
-    font-weight: 100;
-}
-
-.text-medium {
-    font-weight: 300;
-}
-
-.text-bold {
-    font-weight: 700;
-}
-
-.text-spacious {
-    letter-spacing: 0.6em;
-}
-
-.text-shadow {
-    text-shadow: 0 0 4px rgba(0,0,0,0.4);
 }
 
 button {
@@ -82,10 +34,80 @@ button {
     border: 1px solid #fff;
 }
 
-.divider {
-    height: 35px;
-    width: 100%;
-    margin: 0px auto;
-    background: url(../img/divider.png) no-repeat scroll center transparent;
-    padding: 4px;
+.title-container {
+  animation: flipInX 2s;
+  text-align: center;
+}
+
+.title-container.ng-hide {
+  animation: flipOutY 1s;
+}
+
+.story-container {
+  animation: fadeInUp 2s;
+  max-width:640px;
+  top: 16px;
+  bottom: 8px;
+  height: 100%;
+}
+
+.story-container.ng-hide {
+  animation: flipOutY 1s;
+}
+
+.row.event {
+    animation: fadeInDown 1s;
+}
+
+.dialogue {
+    margin:auto;
+    height: auto;
+    width:100%;
+    bottom: 186px;
+    position:absolute;
+}
+
+.userArea {
+    margin-top:8px;
+    margin: auto;
+    left: 0;
+    right: 0;
+    width:100%;
+    position:absolute;
+    bottom: 0;
+    height:176px;
+}
+
+.userArea button {
+    padding: 8px;
+    width:80% !important;
+    left: 0;
+    text-align: left !important;
+    margin: auto;
+    border: none;
+    display: block !important;
+}
+
+.event .columns.your-action {
+    text-align: left !important;
+}
+
+.event .columns.your-speech {
+    text-align: left !important;
+}
+
+.event .columns.other-action {
+    text-align: right !important;
+}
+
+.event .columns.other-speech {
+    text-align: right !important;
+}
+
+.user-option {
+    animation: fadeInDown .5s;
+}
+
+.user-option.ng-leave {
+    animation: fadeOutDown .5s;
 }
