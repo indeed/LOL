@@ -1,18 +1,37 @@
 ﻿
 .blur {
-    animation-name: blur;
-    animation-duration: 2s;
+    -webkit-animation-name: blur;
+            animation-name: blur;
+    -webkit-animation-duration: 2s;
+            animation-duration: 2s;
+    filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="12" /></filter></svg>#filter');
     filter: blur(12px);
     -webkit-filter: blur(12px);
 }
 
-@keyframes blur {
+@-webkit-keyframes blur {
     from {
+        filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="0" /></filter></svg>#filter');
         filter: blur(0px);
         -webkit-filter: blur(0px);
     }
 
     to {
+        filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="10" /></filter></svg>#filter');
+        filter: blur(10px);
+        -webkit-filter: blur(10px);
+    }
+}
+
+@keyframes blur {
+    from {
+        filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="0" /></filter></svg>#filter');
+        filter: blur(0px);
+        -webkit-filter: blur(0px);
+    }
+
+    to {
+        filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="10" /></filter></svg>#filter');
         filter: blur(10px);
         -webkit-filter: blur(10px);
     }
@@ -46,6 +65,10 @@
     letter-spacing: 0.6em;
 }
 
+.text-spaced {
+    letter-spacing: 0.2em;
+}
+
 .text-shadow {
     text-shadow: 0 0 4px rgba(0,0,0,0.4);
 }
@@ -55,6 +78,6 @@
     width: 100%;
     margin: 0px auto;
     background: url(../img/divider.png) no-repeat scroll center transparent;
-    padding: 4px;
-    animation: fadeIn 2s;
+    -webkit-animation: fadeIn 2s;
+            animation: fadeIn 2s;
 }

@@ -1,6 +1,8 @@
 ﻿body {
     background-color: #ccc;
     color: #fff;
+    padding: 0;
+    margin: 0;
 }
 
 #content {
@@ -14,12 +16,14 @@
     background-color: rgba(0,0,0,0.3);
     box-shadow: 0 0 0 16px rgba(0,0,0,0.3);
     color: #fff;
+    -webkit-animation: fadeIn 2s;
     animation: fadeIn 2s;
 }
 
-#content.ng-hide {
-    animation: zoomOut 2s;
-}
+    #content.ng-hide {
+        -webkit-animation: fadeOut 2s;
+        animation: fadeOut 2s;
+    }
 
 .container {
     width: 100%;
@@ -40,60 +44,67 @@ button {
 }
 
 .title-container {
-  animation: flipInX 2s;
-  text-align: center;
+    -webkit-animation: flipInX 2s;
+    animation: flipInX 2s;
+    text-align: center;
 }
 
-.title-container.ng-hide {
-  animation: flipOutY 1s;
-}
+    .title-container.ng-hide {
+        -webkit-animation: flipOutY 1s;
+        animation: flipOutY 1s;
+    }
 
 .story-container {
-  animation: fadeInUp 2s;
-  max-width:640px;
-  top: 16px;
-  bottom: 8px;
-  height: 100%;
-  font-size: 1.8rem;
+    -webkit-animation: fadeInUp 2s;
+    animation: fadeInUp 2s;
+    max-width: 640px;
+    top: 16px;
+    bottom: 8px;
+    height: 100%;
+    font-size: 28px;
+    font-size: 1.8rem;
 }
 
-.story-container.ng-hide {
-  animation: flipOutY 1s;
-}
+    .story-container.ng-hide {
+        -webkit-animation: fadeOutUp 2s;
+        animation: fadeOutUp 2s;
+    }
 
 .row.event {
+    -webkit-animation: fadeInDown 1s;
     animation: fadeInDown 1s;
-    margin-top:8px;
+    margin-top: 8px;
+    text-shadow: 0 0 4px rgba(0,0,0,0.4);
 }
 
 .dialogue {
-    margin:auto;
+    margin: auto;
     height: auto;
-    width:100%;
+    width: 100%;
     bottom: 186px;
-    position:absolute;
+    position: absolute;
 }
 
 .userArea {
-    margin-top:8px;
+    margin-top: 8px;
     margin: auto;
     left: 0;
     right: 0;
-    width:100%;
-    position:absolute;
+    width: 100%;
+    position: absolute;
     bottom: 0;
-    height:176px;
+    height: 176px;
 }
 
-.userArea button {
-    padding: 8px;
-    width:80% !important;
-    left: 0;
-    text-align: left !important;
-    margin: auto;
-    border: none;
-    display: block !important;
-}
+    .userArea button {
+        padding: 8px;
+        width: 80% !important;
+        left: 0;
+        text-align: left !important;
+        margin: auto;
+        border: none;
+        display: block !important;
+    }
 
 .event .columns.your-action {
     text-align: right !important;
@@ -118,22 +129,75 @@ button {
     width: 100%;
     margin: 10px auto;
     background: url(../img/divider-small.png) no-repeat scroll center transparent;
-    animation: fadeInUp 2s !important;
+    -webkit-animation: fadeInUp 3s !important;
+    animation: fadeInUp 3s !important;
+    padding: 4px;
 }
 
 
 .user-option {
+    -webkit-animation: fadeInDown .5s;
     animation: fadeInDown .5s;
 }
 
-.user-option.ng-leave {
-    animation: fadeOutDown .5s;
-}
+    .user-option.ng-leave {
+        -webkit-animation: fadeOutDown .5s;
+        animation: fadeOutDown .5s;
+    }
 
 .bg-video {
+    -webkit-animation: fadeIn 3s;
     animation: fadeIn 3s;
 }
 
-.bg-video.ng-hide {
-    animation: fadeOut 3s;
+    .bg-video.ng-hide {
+        -webkit-animation: fadeOut 3s;
+        animation: fadeOut 3s;
+    }
+
+.end-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    -webkit-animation: fadeIn 2s;
+    animation: fadeIn 2s;
+    -webkit-animation: fadeIn 2s;
+    animation: fadeIn 2s;
+    background: rgba(0,0,0,0.4);
+}
+
+.center{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column
+
+}
+
+.end-message{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width:60%;
+  animation: fadeIn 2s;
+}
+
+.end-message.ng-hide-add.ng-hide-add-active{
+    animation: fadeOut 2s;
+}
+
+.fadein.ng-hide-remove,
+.fadeout.ng-hide-add.ng-hide-add-active {
+    opacity: 0;
+}
+
+.fadeout.ng-hide-add,
+.fadein.ng-hide-remove.ng-hide-remove-active {
+    opacity: 1;
 }
