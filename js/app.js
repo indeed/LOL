@@ -8,6 +8,10 @@ app.controller('titleCtrl', function ($scope, $timeout, ngAudio) {
     $scope.ambient.volume = 0.3;
     $scope.ambient.loop = true;
 
+    $scope.lavieenrose = ngAudio.load("media/lavieenrose.mp3");
+    $scope.lavieenrose.volume = 0.5;
+    $scope.lavieenrose.loop = false;
+
     $scope.ambient.play();
 
     $scope.loaded = false;
@@ -41,7 +45,7 @@ app.controller('titleCtrl', function ($scope, $timeout, ngAudio) {
     }
 
     $scope.endScreen = function () {
-        $timeout(function () { $scope.endMessage = 1; }, 2 * ticks)
+        $timeout(function () { $scope.endMessage = 1; $scope.lavieenrose.play(); }, 2 * ticks)
         .then(function () { return $timeout(function () { $scope.endMessage = 0; }, 6 * ticks) })
         .then(function () { return $timeout(function () { $scope.endMessage = 2; }, 4 * ticks) })
         .then(function () { return $timeout(function () { $scope.endMessage = 0; }, 6 * ticks) })
@@ -65,10 +69,6 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
     $scope.desertambient = ngAudio.load("media/desertambient.mp3");
     $scope.desertambient.volume = 0.5;
     $scope.desertambient.loop = true;
-
-    $scope.lavieenrose = ngAudio.load("media/lavieenrose.mp3");
-    $scope.lavieenrose.volume = 0.5;
-    $scope.lavieenrose.loop = false;
 
     $scope.options = {
         intro_leave: { name: "Go back outside", event: ['intro_gottastay'] },
@@ -285,7 +285,6 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
             $scope.$parent.end = true;
 
             $timeout(function () {
-                $scope.lavieenrose.play();
                 $scope.$parent.endScreen();
             }, 3 * ticks);
 
