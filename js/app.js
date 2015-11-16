@@ -116,12 +116,33 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
             options: [$scope.options.intro_buycoffee, $scope.options.toDesert]
         },
 
-        intro_friendcall: {
-            text: "Suddenly, you hear your name being called.", type: "other-action",
+        meet_buycoffee: {
+            text: "You get bored of pretending to check your phone and decide to get to line . Plus, you're feeling a little tired anyway.", type: "other-action",
             options: [$scope.options.intro_ignorecall, $scope.options.intro_walkover]
         },
 
-        //meet friend from high school
+        meet_stand: {
+            text: "You stay near the entrance, occasionally pretending to check your phone.", type: "other-action",
+            options: [$scope.options.intro_ignorecall, $scope.options.intro_walkover]
+        },
+
+        meet_friendcall: {
+            text: "Suddenly, you hear your name being called.", type: "other-action",
+        },
+
+        meet_ignorecall_talk: {
+            text: "Hey! Over here! It's Tobi from high school!", type: "other-speech",
+        },
+
+        meet_walkover: {
+            text: "You ", type: "other-action",
+            options: [$scope.options.intro_walkover]
+        },
+
+        meet_ignorecall: {
+            text: "Hey! Over here!", type: "other-speech",
+            options: [$scope.options.intro_walkover]
+        },
 
         //talk about teachers
 
