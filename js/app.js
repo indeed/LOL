@@ -93,7 +93,6 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
         // Back to Cafe
         end_ask: { name: "Ask about what happened to José", event: ['end_ask', 'end_rip1', 'end_rip2', 'end_rip3'] },
 
-
         end_leave: { name: "Go home", event: ['end'] },
 
     }
@@ -114,7 +113,12 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
 
         intro_lookaround: {
             text: "You look around. It's quite crowded. To the right, a line of wet people who were told by a snappish employee to buy something or leave. Some unfortunate man is standing outside the window, having left his wallet at home.", type: "other-action",
-            options: [$scope.options.intro_leave, $scope.options.toDesert]
+            options: [$scope.options.intro_buycoffee, $scope.options.toDesert]
+        },
+
+        intro_friendcall: {
+            text: "Suddenly, you hear your name being called.", type: "other-action",
+            options: [$scope.options.intro_ignorecall, $scope.options.intro_walkover]
         },
 
         //meet friend from high school
