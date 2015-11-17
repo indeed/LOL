@@ -2,7 +2,13 @@
 
 var ticks = 1000;
 
-app.controller('titleCtrl', function ($scope, $timeout, ngAudio) {
+//TO ADD
+// joke enter
+// intro text fading
+// fade out to black
+// play again
+
+app.controller('titleCtrl', function ($scope, $timeout, $window, ngAudio) {
 
     $scope.ambient = ngAudio.load("media/titleambient.mp3");
     $scope.ambient.volume = 0.3;
@@ -44,13 +50,20 @@ app.controller('titleCtrl', function ($scope, $timeout, ngAudio) {
         }, 1 * ticks);
     }
 
+    $scope.reload = function () {
+        $window.location.reload();
+    }
+
     $scope.endScreen = function () {
         $timeout(function () { $scope.endMessage = 1; $scope.lavieenrose.play(); }, 2 * ticks)
         .then(function () { return $timeout(function () { $scope.endMessage = 0; }, 6 * ticks) })
         .then(function () { return $timeout(function () { $scope.endMessage = 2; }, 4 * ticks) })
         .then(function () { return $timeout(function () { $scope.endMessage = 0; }, 6 * ticks) })
         .then(function () { return $timeout(function () { $scope.endMessage = 3; }, 4 * ticks) })
-        .then(function () { return $timeout(function () { $scope.endMessage = 0; }, 10 * ticks) });
+        .then(function () { return $timeout(function () { $scope.endMessage = 0; }, 6 * ticks) })
+        .then(function () { return $timeout(function () { $scope.endMessage = 4; }, 4 * ticks) })
+        .then(function () { return $timeout(function () { $scope.endMessage = 0; }, 10 * ticks) })
+        .then(function () { return $timeout(function () { $scope.endMessage = 5; }, 4 * ticks) });
     }
 
 });
@@ -64,15 +77,29 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
     $scope.story = {};
 
     $scope.sfx_click = ngAudio.load("media/click.mp3");
-    $scope.sfx_click.volume = 0.2;
+    $scope.sfx_click.volume = 0.25;
 
     $scope.desertambient = ngAudio.load("media/desertambient.mp3");
     $scope.desertambient.volume = 0.5;
     $scope.desertambient.loop = true;
 
+    $scope.rain = ngAudio.load("media/rain.mp3");
+    $scope.rain.volume = 0.1;
+    $scope.rain.loop = true;
+
+    $scope.sfx_door = ngAudio.load("media/door.mp3");
+    $scope.sfx_door.volume = 0.5;
+    $scope.sfx_door.loop = false;
+
     $scope.options = {
         intro_leave: { name: "Go back outside", event: ['intro_gottastay'] },
         intro_lookaround: { name: "Look around", event: ['intro_lookaround'] },
+
+        intro_buycoffee: { name: "Buy coffee", event: ['meet_buycoffee', 'meet_friendcall', 'meet_friendcall2'] },
+        intro_stand: { name: "Stay where you are", event: ['meet_stand', 'meet_friendcall', 'meet_friendcall2'] },
+
+        meet_ignorecall: { name: "Ignore him", event: ['meet_ignorecall', 'meet_ignorecall2'] },
+        meet_walkover: { name: "Talk to him", event: ['meet_walkover'] },
 
         // Desert
         toDesert: { name: "TO DESERT!", event: ['goToDesert'] },
@@ -88,10 +115,15 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
 
         desert_telljoke: { name: "Tell Joke", event: ['desert_telljoke', 'divider'] },
 
-        desert_end: { name: "End", event: ['backToCafe'] },
+        desert_end: { name: "Finish story", event: ['backToCafe'] },
 
         // Back to Cafe
-        end_ask: { name: "Ask about what happened to José", event: ['end_ask', 'end_rip1', 'end_rip2', 'end_rip3'] },
+        end_ask: { name: "Ask about what happened to José", event: ['end_ask', 'end_rip1', 'end_rip2','end_rip3'] },
+        end_condolences: { name: "Offer your condolences", event: ['end_condolences', 'end_itsok1', 'end_itsok2', 'end_itsok3'] },
+        end_silent: { name: "Stay silent", event: ['end_silent', 'end_itsok1', 'end_itsok2', 'end_itsok3'] },
+
+        end_reflect: { name: "Reflect", event: ['end_reflect'] },
+
 
         end_leave: { name: "Go home", event: ['end'] },
 
@@ -113,35 +145,43 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
 
         intro_lookaround: {
             text: "You look around. It's quite crowded. To the right, a line of wet people who were told by a snappish employee to buy something or leave. Some unfortunate man is standing outside the window, having left his wallet at home.", type: "other-action",
-            options: [$scope.options.intro_buycoffee, $scope.options.toDesert]
+            options: [$scope.options.intro_buycoffee, $scope.options.intro_stand]
         },
 
         meet_buycoffee: {
-            text: "You get bored of pretending to check your phone and decide to get to line . Plus, you're feeling a little tired anyway.", type: "other-action",
-            options: [$scope.options.intro_ignorecall, $scope.options.intro_walkover]
+            text: "You get bored of pretending to check your phone and decide to get in line for a coffee.", type: "other-action",
+            options: [$scope.options.meet_ignorecall, $scope.options.meet_walkover]
         },
 
         meet_stand: {
             text: "You stay near the entrance, occasionally pretending to check your phone.", type: "other-action",
-            options: [$scope.options.intro_ignorecall, $scope.options.intro_walkover]
+            options: [$scope.options.meet_ignorecall, $scope.options.meet_walkover]
         },
 
         meet_friendcall: {
             text: "Suddenly, you hear your name being called.", type: "other-action",
         },
 
-        meet_ignorecall_talk: {
-            text: "Hey! Over here! It's Tobi from high school!", type: "other-speech",
-        },
-
-        meet_walkover: {
-            text: "You ", type: "other-action",
-            options: [$scope.options.intro_walkover]
+        meet_friendcall2: {
+            text: "Yo! Over here! It's Tobi from high school!", type: "other-speech",
         },
 
         meet_ignorecall: {
-            text: "Hey! Over here!", type: "other-speech",
-            options: [$scope.options.intro_walkover]
+            text: "Hello? Over here!", type: "other-speech",
+            options: [$scope.options.meet_walkover]
+        },
+
+        meet_ignorecall2: {
+            text: "It would be rude to just ignore someone calling to you.", type: "your-action",
+        },
+
+        meet_walkover: {
+            text: "You walk over and meet the friend", type: "other-action",
+            options: [$scope.options.toDesert]
+        },
+
+        meet_walkover2: {
+            text: "Hey, long time no see!", type: "other-action",
         },
 
         //talk about teachers
@@ -154,7 +194,7 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
 
         // Desert
         goToDesert: {
-            text: "I walked around the desert, with my bud and stuff. He was a pro. Forgot to refill. Do I go back, or keep going?", type: "other-action",
+            text: "I walked around the desert, with my bud who was like 65 I met online on a forum. We were tight. He was a pro. Forgot to refill. Do I go back, or keep going?", type: "other-action",
             options: [$scope.options.desert_keepgoing, $scope.options.desert_turnback]
         },
 
@@ -169,7 +209,7 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
         },
 
         desert_start_walk: {
-            text: "I flip a coin to determine whether or not we go back. Once decided on our course of action, we hear the unpleasant sounds of an engine breaking down. There's no reception out here, we'll have to walk.", type: "other-action",
+            text: "José and I disagree on what to do, so we end up flipping a coin to determine whether or not we go back. Once decided on our course of action, we hear the unpleasant sounds of an engine breaking down. There's no reception out here, we'll have to walk.", type: "other-action",
         },
 
         desert_walk: {
@@ -178,7 +218,7 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
         },
 
         desert_walk_ignore: {
-            text: "Okay, let me just completely ignore my friend yelling literally ten feet behind me.", type: "other-action",
+            text: "Okay, let me just completely ignore my friend yelling literally ten feet behind me.", type: "other-speech",
             options: [$scope.options.desert_walk_investigate]
         },
 
@@ -193,7 +233,12 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
         },
 
         desert_helpfriend: {
-            text: "I walk over to see what's wrong. If my intuition is right, another big rock has found its way into José's shoe.", type: "other-action",
+            text: "I walk over to see what's wrong. If my intuition is right, another sharp pebble has found its way into José's shoe.", type: "other-action",
+            options: [$scope.options.desert_telljoke]
+        },
+
+        desert_gotbit: {
+            text: "A snake! A snake bit me!", type: "other-action",
             options: [$scope.options.desert_telljoke]
         },
 
@@ -203,28 +248,32 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
 
         // ok let's see if i can remember what to do
 
-        // suck wound, wrap, look for antivenom
-
-        // laughter is the best medicine, what do i have to lose
-
         desert_telljoke: {
-            text: "I tell him the dankest joke ever. I don't remember it anymore, but I thought it was hilarious. He looks at me. We stand there like idiots in the desert, him dying there and both of us laughing our asses off.", type: "other-action",
+            text: "For a moment, we look at each other. I take a deep breath.", type: "other-action",
             options: [$scope.options.desert_end]
+        },
+
+        desert_telljoke2: {
+            text: "I tell him something I don't remember it anymore. For a few seconds, José just stares at me.", type: "other-action",
+        },
+
+        desert_telljoke3: {
+            text: "As if on cue, we both burst out in uncontrollable laughter. In retrospect, it wasn't even that funny - but for whatever reason, we stand there like idiots in the desert, him dying there and both of us laughing our asses off-", type: "other-action",
         },
 
 
         backToCafe: {
-            text: '- and he laughed really hard after a pause, descriptive stuff here.', type: "other-speech",
+            text: '-and he laughed really hard after a pause, descriptive stuff here. It felt surreal to say the least, seeing him genuinely laugh.', type: "other-speech",
             options: [$scope.options.end_ask]
         },
 
         end_ask: {
             text: 'So what happened to him in the end?', type: "your-speech",
-            options: [$scope.options.end_condolences, $scope.options.end_leave]
+            options: [$scope.options.end_condolences, $scope.options.end_silent]
         },
 
         end_rip1: {
-            text: "He blinks at you as if you've said the dumbest thing he's heard all day.", type: "other-action",
+            text: "He blinks at you as if you've just said the dumbest thing he's heard all day.", type: "other-action",
         },
 
         end_rip2: {
@@ -232,12 +281,57 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
         },
 
         end_rip3: {
-            text: "I'll never forget how geniunely amused he was. He laughs.", type: "other-action",
+            text: "Oh.", type: "other-action",
         },
 
-        // condolences or ask about career
+        end_condolences: {
+            text: "You offer Tobi your genuine condolences for the loss of his friend.", type: "other-action",
+            options: [$scope.options.end_reflect]
+        },
 
-        // no no, Remember me with smiles and laughter, for that is how I will remember you all. If you can only remember me with tears, then don't remember me at all. its what jose would have wanted
+        end_silent: {
+            text: "You say nothing, looking down as you do so. You fiddle with a beverage stirrer, but you don't have any coffee to stir.", type: "your-action",
+            options: [$scope.options.end_reflect]
+        },
+
+        end_itsok1: {
+            text: "It's alright; that was years ago. You know, there's this quote from a book I read when I was a kid—it's hard to remember now—", type: "other-speech",
+        },
+
+        end_itsok2: {
+            text: "Remember me with smiles and laughter, for that is how I will remember you all. If you can only remember me with tears, then don't remember me at all.", type: "quote",
+        },
+
+        end_itsok3: {
+            text: "—yeah, José was that kind of guy. Life's short, might as well laugh whenever you can, am I right?", type: "other-speech",
+        },
+
+        end_reflect: {
+            text: "You wonder out loud whether. Tobi grins.", type: "other-action",
+            options: [$scope.options.end_dankmeme]
+        },
+
+        end_reflect2: {
+            text: "He", type: "other-action",
+        },
+
+        end_career: {
+            text: "Is that why you started doing comedy; to make people happy and give them relief from the problems?", type: "other-action",
+            options: [$scope.options.end_dankmeme]
+        },
+
+        end_career2: {
+            text: "Yeah, I guess you could say that. It also helped that I got rejected from med school.", type: "other-speech",
+        },
+
+        end_dankmeme: {
+            text: "Well, I wouldn't want my doctor doing a stand-up routine to treat my flu.", type: "other-action",
+            options: [$scope.options.end_leave]
+        },
+
+        end_dankmeme2: {
+            text: "You both immediately crack up. You're laughing so hard, you almost fail to notice the bus that's arrived outside of the coffee shop.", type: "your-speech",
+        },
 
         // so is that why you want to be a comedian?
 
@@ -247,11 +341,11 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
 
         // say goodbye
 
+        //You tell him you'll keep in touch on facebook.
 
 
-
-        // no matter how shitty your life is, there's always room for laughter - it's free
-        // Laughter heals all wounds, and that's one thing that everybody shares. No matter what you're going through, it makes you forget about your problems. I think the world should keep laughing.
+        // Explores both the simplicity and the effectiveness/greatness of laughter - how it is so universal - gr8 for a dying guy as much as someone who missed their bus.
+        // contrasting two interactiosn between friends - and how they both share laughter
 
     };
 
@@ -307,8 +401,10 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
 
             $scope.$parent.storyTime = false;
             $scope.$parent.ambient.stop();
+            $scope.sfx_door.play()
+            $scope.rain.play();
             $scope.$parent.end = true;
-
+           
             $timeout(function () {
                 $scope.$parent.endScreen();
             }, 3 * ticks);

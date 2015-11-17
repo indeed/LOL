@@ -51,14 +51,14 @@
                 <br>
                 <div class="divider"></div>
                 <br>
-                <button style="margin-top:4px;" ng-audio="media/click.mp3" volume="0.2" start="0" class="hvr-sweep-to-right" ng-click="start()"><h5><i class="icon ion-android-send"></i>&nbsp;&nbsp; P L A Y</></h5></button>
+                <button style="margin-top:4px;" ng-audio="media/click.mp3" volume="0.25" start="0" class="hvr-sweep-to-right" ng-click="start()"><h5><i class="icon ion-android-send"></i>&nbsp;&nbsp; P L A Y</></h5></button>
             </div>
 
             <div class="container story-container" ng-hide="!storyTime" ng-controller="mainCtrl">
                 <div class="divider"></div>
                 <div class="dialogue">
                     <div class="row event" ng-repeat="event in events track by $index">
-                        <div class="twelve columns {{event.type}}" ng-style="{opacity: (getContentHeight() - 130)/320 - (events.length - $index)/5}">
+                        <div class="twelve columns {{event.type}}" ng-style="{opacity: (getContentHeight() - 130)/300 - (events.length - $index)/6}">
                             {{event.text}}
                         </div>
                     </div>
@@ -74,19 +74,29 @@
         <div class="end-container" ng-hide="!end">
                 <div class="center end-message">
                     <h4 ng-hide="!(endMessage == 1)" class="end-message fadeout">
-                        You walk out. It's still raining.
+                        It's still raining as you board the bus.
                     </h4>
                     <h4 ng-hide="!(endMessage == 2)" class="end-message fadeout">
-                        The bus is just leaving the stop.
+                        You shift uncomfortably in your rain soaked jacket.
+
+                        It's amazing how 
                     </h4>
                     <h4 ng-hide="!(endMessage == 3)" class="end-message fadeout">
-                        Laughter heals all wounds, and that's one thing that everybody shares. No matter what you're going through, it makes you forget about your problems. I think the world should keep laughing.
+                        You shift uncomfortably in your rain soaked jacket.
 
-                        It's never the wrong time to share a laugh. It's free.
+                        It's amazing how
+                    </h4>
+                    <h4 ng-hide="!(endMessage == 4)" class="end-message fadeout" style="font-style:italic">
+                        Laughter heals all wounds, and that's one thing that everybody shares. No matter what you're going through, it makes you forget about your problems. I think the world should keep laughing.
+                    </h4>
+                    <h4 ng-hide="!(endMessage == 5)" class="end-message fadeout">
+                        Share a laugh with a friend<br><b>It's free.</b>
+                        <br><br>
+                        <button ng-audio="media/click.mp3" volume="0.2" start="0" class="hvr-sweep-to-right" ng-click="reload()"><h4><i class="icon ion-android-refresh"></i></h4></button>
                     </h4>
                 </div>
 
-        </div>
+            </div>
     </div>
 </body>
 

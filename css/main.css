@@ -73,7 +73,7 @@ button {
 .row.event {
     -webkit-animation: fadeInDown 1s;
     animation: fadeInDown 1s;
-    margin-top: 8px;
+    margin-top: 6px;
     text-shadow: 0 0 4px rgba(0,0,0,0.4);
 }
 
@@ -113,6 +113,8 @@ button {
 
 .event .columns.your-speech {
     text-align: right !important;
+    font-weight: 600;
+    animation: slideInRight 1s;
 }
 
 .event .columns.other-action {
@@ -122,8 +124,26 @@ button {
 
 .event .columns.other-speech {
     text-align: left !important;
+    font-weight: 600;
+    animation: slideInLeft 1s;
 }
 
+.event .columns.other-speech:before {
+    content: '>';
+    margin-right: 4px;
+}
+
+.event .columns.your-speech:before {
+    content: '>';
+    margin-right: 4px;
+}
+
+.event .columns.quote {
+    text-align: center !important;
+    font-weight: 200;
+    padding: 12px 36px 12px 36px;
+    animation: tada 1.5s;
+}
 .event .columns.divider {
     height: 35px;
     width: 100%;
@@ -184,7 +204,7 @@ button {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width:60%;
+  width:64%;
   animation: fadeIn 2s;
 }
 
