@@ -122,9 +122,11 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
         end_condolences: { name: "Offer your condolences", event: ['end_condolences', 'end_itsok1', 'end_itsok2', 'end_itsok3'] },
         end_silent: { name: "Stay silent", event: ['end_silent', 'end_itsok1', 'end_itsok2', 'end_itsok3'] },
 
-        end_reflect: { name: "Reflect", event: ['end_reflect'] },
+        end_reflect: { name: "Reflect", event: ['end_reflect', 'end_reflect2'] },
+        end_reflect: { name: "Ask about career", event: ['end_career', 'end_career2'] },
 
-
+        end_dankmeme: { name: "DANK MEME", event: ['end_dankmeme', 'end_dankmeme2'] },
+          
         end_leave: { name: "Go home", event: ['end'] },
 
     }
@@ -239,7 +241,10 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
 
         desert_gotbit: {
             text: "A snake! A snake bit me!", type: "other-action",
-            options: [$scope.options.desert_telljoke]
+        },
+
+        desert_dank  : {
+            text: "It's worse than I expected. He's pale and sweating profusely. Man, if only I got accepted into med school, I would know what to do.", type: "other-action",
         },
 
         // he says he got bit
