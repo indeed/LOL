@@ -1,6 +1,6 @@
 ﻿var app = angular.module('lol', ['ui.router', 'ngVidBg', 'ngAudio', 'ngAnimate', 'lol.directives']);
 
-var ticks = 1000;
+var ticks = 10;
 
 //TO ADD
 // joke enter
@@ -22,7 +22,12 @@ app.controller('titleCtrl', function ($scope, $timeout, $window, ngAudio) {
 
     $scope.loaded = false;
     $scope.load = function () {
-        $scope.loaded = true;
+        $timeout(function () {
+            $scope.noStartText = true;
+            $timeout(function () {
+                $scope.loaded = true;
+            }, 0.5 * ticks);
+        }, 2.4 * ticks);
     }
 
     $scope.bg = {
@@ -62,8 +67,10 @@ app.controller('titleCtrl', function ($scope, $timeout, $window, ngAudio) {
         .then(function () { return $timeout(function () { $scope.endMessage = 3; }, 4 * ticks) })
         .then(function () { return $timeout(function () { $scope.endMessage = 0; }, 6 * ticks) })
         .then(function () { return $timeout(function () { $scope.endMessage = 4; }, 4 * ticks) })
+        .then(function () { return $timeout(function () { $scope.endMessage = 0; }, 8 * ticks) })
+        .then(function () { return $timeout(function () { $scope.endMessage = 5; }, 4 * ticks) })
         .then(function () { return $timeout(function () { $scope.endMessage = 0; }, 10 * ticks) })
-        .then(function () { return $timeout(function () { $scope.endMessage = 5; }, 4 * ticks) });
+        .then(function () { return $timeout(function () { $scope.endMessage = 6; }, 4 * ticks) });
     }
 
 });
@@ -101,8 +108,11 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
         meet_ignorecall: { name: "Ignore him", event: ['meet_ignorecall', 'meet_ignorecall2'] },
         meet_walkover: { name: "Talk to him", event: ['meet_walkover'] },
 
+        meet_asklife: { name: "Ask him about his life", event: ['meet_asklife', 'meet_asklife2'] },
+        meet_askgrad: { name: "Ask what he did after graduating", event: ['meet_askgrad', 'meet_askgrad2'] },
+
         // Desert
-        toDesert: { name: "TO DESERT!", event: ['goToDesert'] },
+        toDesert: { name: "Listen to his long story", event: ['goToDesert'] },
         desert_keepgoing: { name: "Keep going", event: ['desert_keepgoing', 'desert_start_walk'] },
         desert_turnback: { name: "Turn back", event: ['desert_turnback', 'desert_start_walk', 'divider'] },
         desert_walk: { name: "Get out and start walking", event: ['desert_walk'] },
@@ -110,10 +120,14 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
         desert_walk_investigate: { name: "Turn around", event: ['desert_walk_investigate'] },
         desert_walk_ignore: { name: "Ignore it", event: ['desert_walk_ignore'] },
 
-        desert_helpfriend: { name: "Investigate", event: ['desert_helpfriend'] },
-        desert_freakout: { name: "Freak out", event: ['desert_freakout'] },
+        desert_helpfriend: { name: "Investigate", event: ['desert_helpfriend', 'desert_gotbit'] },
+        desert_freakout: { name: "Freak out", event: ['desert_freakout', 'desert_gotbit'] },
+        desert_closerlook: { name: "Take a closer look", event: ['desert_closerlook'] },
 
-        desert_telljoke: { name: "Tell Joke", event: ['desert_telljoke', 'divider'] },
+
+
+
+        desert_telljoke: { name: "Tell Joke", event: ['desert_telljoke', 'desert_telljoke2', 'desert_telljoke3', 'divider'] },
 
         desert_end: { name: "Finish story", event: ['backToCafe'] },
 
@@ -122,13 +136,22 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
         end_condolences: { name: "Offer your condolences", event: ['end_condolences', 'end_itsok1', 'end_itsok2', 'end_itsok3'] },
         end_silent: { name: "Stay silent", event: ['end_silent', 'end_itsok1', 'end_itsok2', 'end_itsok3'] },
 
-        end_reflect: { name: "Reflect", event: ['end_reflect', 'end_reflect2'] },
-        end_reflect: { name: "Ask about career", event: ['end_career', 'end_career2'] },
+        end_reflect: { name: "Reflect on Tobi's career choice", event: ['end_reflect', 'end_reflect2'] },
 
-        end_dankmeme: { name: "DANK MEME", event: ['end_dankmeme', 'end_dankmeme2'] },
+        end_dankmeme: { name: "Joke about med school", event: ['end_dankmeme', 'end_dankmeme2', 'end_dankmeme3'] },
           
-        end_leave: { name: "Go home", event: ['end'] },
+        end_stay: { name: "Stay a little longer", event: ['end_stay'] },
 
+        end_saybye: { name: "Say goodbye", event: ['end_saybye'] },
+
+        end_leave: { name: "Leave coffee shop", event: ['end'] },
+
+    }
+
+    $scope.treatments = {
+        desert_treat1: { name: "Wrap the wound", event: ['desert_treat1'], id: "desert_treat1" },
+        desert_treat2: { name: "Suck out the venom", event: ['desert_treat2'], id: "desert_treat2" },
+        desert_treat3: { name: "Tie a tourniquet", event: ['desert_treat3'], id: "desert_treat3" },
     }
 
     $scope.story = {
@@ -146,12 +169,12 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
         },
 
         intro_lookaround: {
-            text: "You look around. It's quite crowded. To the right, a line of wet people who were told by a snappish employee to buy something or leave. Some unfortunate man is standing outside the window, having left his wallet at home.", type: "other-action",
+            text: "You look around. It's quite crowded. To the right, you see a line of wet people who were told by a snappish employee to buy something or leave. Some unfortunate soul is standing outside the window, having left his wallet at home.", type: "other-action",
             options: [$scope.options.intro_buycoffee, $scope.options.intro_stand]
         },
 
         meet_buycoffee: {
-            text: "You get bored of pretending to check your phone and decide to get in line for a coffee.", type: "other-action",
+            text: "You get bored of pretending to check your phone and decide to get in line for a cup of coffee.", type: "other-action",
             options: [$scope.options.meet_ignorecall, $scope.options.meet_walkover]
         },
 
@@ -165,11 +188,11 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
         },
 
         meet_friendcall2: {
-            text: "Yo! Over here! It's Tobi from high school!", type: "other-speech",
+            text: "Hey! Remember me? It's Tobi from high school!", type: "other-speech",
         },
 
         meet_ignorecall: {
-            text: "Hello? Over here!", type: "other-speech",
+            text: "Hello? I'm over here!", type: "other-speech",
             options: [$scope.options.meet_walkover]
         },
 
@@ -178,30 +201,42 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
         },
 
         meet_walkover: {
-            text: "You walk over and meet the friend", type: "other-action",
-            options: [$scope.options.toDesert]
+            text: "You walk over and meet the man. Tobi doesn't look like he's changed much from high school. Though it's been ten years, you could recognize that beaming smile anywhere.", type: "other-action",
+            options: [$scope.options.meet_asklife, $scope.options.meet_askgrad]
         },
 
         meet_walkover2: {
-            text: "Hey, long time no see!", type: "other-action",
+            text: "You catch up on each other's lives and reminisce about all of the great—and not-so-great—times you had in high school.", type: "other-action",
         },
 
-        //talk about teachers
+        meet_asklife: {
+            text: "What are you up to nowadays?", type: "other-action",
+            options: [$scope.options.toDesert]
+        },
 
-        //says hes an aspiring comedian, writing jokes for his next show
+        meet_asklife2: {
+            text: "Actually, I'm a comedian. An aspiring one, at least—it's been pretty hard to find a decent gig lately, I try to make youtube videos too. I wanted to be a doctor, but that didn't work out—I don't know, maybe I'm glad it didn't. You know, there's a pretty long story behind all of that.", type: "other-speech",
+        },
 
-        //ask why
+        meet_askgrad: {
+            text: "What did you do after graduation?", type: "your-speech",
+            options: [$scope.options.toDesert]
+        },
+
+        meet_askgrad2: {
+            text: "I went travelling a lot. You know, while I tried to figure out what I wanted to do with my life. I'm getting into comedy. I love it, but it's hard to make a living out of small shows and some youtube uploads. Actually, it's a pretty long story. ", type: "other-speech",
+        },
 
         //tell story
 
         // Desert
         goToDesert: {
-            text: "I walked around the desert, with my bud who was like 65 I met online on a forum. We were tight. He was a pro. Forgot to refill. Do I go back, or keep going?", type: "other-action",
+            text: "Back then, I still didn't know what to do with my life. This one summer, I planned a desert road trip with José—he's a guy I knew from Muay Thai. So we're on an empty backroad somewhere in Arizona, and I realise that I didn't bring enough water.", type: "other-action",
             options: [$scope.options.desert_keepgoing, $scope.options.desert_turnback]
         },
 
         desert_keepgoing: {
-            text: "I think we can keep going, it's not very far.", type: "other-speech",
+            text: "I think we can keep going, we can buy what we need at the next gas station.", type: "other-speech",
             options: [$scope.options.desert_walk]
         },
 
@@ -211,16 +246,16 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
         },
 
         desert_start_walk: {
-            text: "José and I disagree on what to do, so we end up flipping a coin to determine whether or not we go back. Once decided on our course of action, we hear the unpleasant sounds of an engine breaking down. There's no reception out here, we'll have to walk.", type: "other-action",
+            text: "José and I disagree on what to do, so we end up flipping a coin to determine whether or not we go back. The coin doesn't matter in the end, the damn car engine fails. There's no reception out here either. Time to walk.", type: "other-action",
         },
 
         desert_walk: {
-            text: "The sun glares down on me, and my mouth is slightly parched. The shimmering air above the road reminds me of water. A shout comes from behind me.", type: "other-action",
+            text: "The sun is pretty high up now, and my mouth is slightly parched. I try not to focus on the shimmering air above the road; it reminds me of water. A shout comes from behind me.", type: "other-action",
             options: [$scope.options.desert_walk_ignore, $scope.options.desert_walk_investigate]
         },
 
         desert_walk_ignore: {
-            text: "Okay, let me just completely ignore my friend yelling literally ten feet behind me.", type: "other-speech",
+            text: "It might not be a good idea to completely ignore my friend yelling ten feet behind me.", type: "other-action",
             options: [$scope.options.desert_walk_investigate]
         },
 
@@ -231,44 +266,57 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
 
         desert_freakout: {
             text: "I am about to completely freak out and panic—however, it occurs to me that I didn't even know what was wrong. I calmly walk over to help José out.", type: "other-action",
-            options: [$scope.options.desert_telljoke]
+            options: [$scope.options.desert_closerlook]
         },
 
         desert_helpfriend: {
-            text: "I walk over to see what's wrong. If my intuition is right, another sharp pebble has found its way into José's shoe.", type: "other-action",
-            options: [$scope.options.desert_telljoke]
+            text: "I walk over to figure out the problem. If my intuition is right, another sharp pebble has found its way into José's shoe.", type: "other-action",
+            options: [$scope.options.desert_closerlook]
         },
 
         desert_gotbit: {
-            text: "A snake! A snake bit me!", type: "other-action",
+            text: "A snake! A snake bit me!", type: "other-speech",
         },
 
-        desert_dank  : {
-            text: "It's worse than I expected. He's pale and sweating profusely. Man, if only I got accepted into med school, I would know what to do.", type: "other-action",
+        desert_closerlook: {
+            text: "It's worse than I expected. He's pale and sweating buckets. Man, if only I got accepted into med school, I would know what to do.", type: "other-action",
+            options: $scope.treatments
         },
 
-        // he says he got bit
+        desert_treat1: {
+            text: "I tear off a piece of my t-shirt and quickly wrap it around his ankle. I realise that wrapping it doesn't help with the venom at all. Now I have to deal with a friend with a snakebite AND I look like a dolt wearing half a t-shirt.", type: "treatment",
+            options: [$scope.options.desert_telljoke]
+        },
 
-        // medical school didn't prepare me for this
+        desert_treat2: {
+            text: "I don't think sucking out snake venom with my mouth is a good idea.", type: "treatment",
+            options: [$scope.options.desert_telljoke]
+        },
 
-        // ok let's see if i can remember what to do
+        desert_treat3: {
+            text: "I use my bandana to tie a makeshift tourniquet above the puncure wounds. It looks stylish, but it doesn't seem to be helping the spread of the venom.", type: "treatment",
+            options: [$scope.options.desert_telljoke]
+        },
+
+        desert_desperate: {
+            text: "I'm running out of ideas. I remember reading something about the healing ability of laughter; people say 'laughter is the best medicine,' or something. It's not like I have anything to lose.", type: "other-action",
+        },
 
         desert_telljoke: {
-            text: "For a moment, we look at each other. I take a deep breath.", type: "other-action",
+            text: "José looks at me quite puzzledly. I take a deep breath.", type: "other-action",
             options: [$scope.options.desert_end]
         },
 
         desert_telljoke2: {
-            text: "I tell him something I don't remember it anymore. For a few seconds, José just stares at me.", type: "other-action",
+            text: "I thought I was hilarious at the time. I don't remember what I said anymore—maybe it's better that way. Well, for a few seconds, José just stares at me—", type: "other-action",
         },
 
         desert_telljoke3: {
-            text: "As if on cue, we both burst out in uncontrollable laughter. In retrospect, it wasn't even that funny - but for whatever reason, we stand there like idiots in the desert, him dying there and both of us laughing our asses off-", type: "other-action",
+            text: "You know how two friends will sometimes just stare at each other for a while and start laughing for no reason? I guess that's what happened: he raises an eyebrow at me, I raise both of mine, we both burst out laughing as if my stupid joke was the funniest thing in the world.", type: "other-action",
         },
 
-
         backToCafe: {
-            text: '-and he laughed really hard after a pause, descriptive stuff here. It felt surreal to say the least, seeing him genuinely laugh.', type: "other-speech",
+            text: 'It felt pretty surreal to say the least, seeing him genuinely laugh like that.', type: "other-speech",
             options: [$scope.options.end_ask]
         },
 
@@ -295,12 +343,12 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
         },
 
         end_silent: {
-            text: "You say nothing, looking down as you do so. You fiddle with a beverage stirrer, but you don't have any coffee to stir.", type: "your-action",
+            text: "You say nothing, looking down as you do so. You fiddle with a beverage stirrer, but you don't have any coffee to stir.", type: "other-action",
             options: [$scope.options.end_reflect]
         },
 
         end_itsok1: {
-            text: "It's alright; that was years ago. You know, there's this quote from a book I read when I was a kid—it's hard to remember now—", type: "other-speech",
+            text: "It's alright; it's all in the past. You know, there's this quote from a book I read when I was a kid—", type: "other-speech",
         },
 
         end_itsok2: {
@@ -308,46 +356,41 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
         },
 
         end_itsok3: {
-            text: "—yeah, José was that kind of guy. Life's short, might as well laugh whenever you can, am I right?", type: "other-speech",
+            text: "—I'm sure José would have agreed.", type: "other-speech",
         },
 
         end_reflect: {
-            text: "You wonder out loud whether. Tobi grins.", type: "other-action",
+            text: "You wonder out loud if he does comedy for the same reason he made his last words to his friend a joke. Tobi grins.", type: "other-action",
             options: [$scope.options.end_dankmeme]
         },
 
         end_reflect2: {
-            text: "He", type: "other-action",
-        },
-
-        end_career: {
-            text: "Is that why you started doing comedy; to make people happy and give them relief from the problems?", type: "other-action",
-            options: [$scope.options.end_dankmeme]
-        },
-
-        end_career2: {
-            text: "Yeah, I guess you could say that. It also helped that I got rejected from med school.", type: "other-speech",
+            text: "Well, that and the fact that I got rejected from med school.", type: "other-speech",
         },
 
         end_dankmeme: {
-            text: "Well, I wouldn't want my doctor doing a stand-up routine to treat my flu.", type: "other-action",
-            options: [$scope.options.end_leave]
+            text: "I know I wouldn't want my doctor trying to treat a flu with a stand-up routine.", type: "your-speech",
+            options: [$scope.options.end_saybye, $scope.options.end_stay]
         },
 
         end_dankmeme2: {
-            text: "You both immediately crack up. You're laughing so hard, you almost fail to notice the bus that's arrived outside of the coffee shop.", type: "your-speech",
+            text: "Fair enough", type: "other-speech",
+            options: [$scope.options.end_saybye, $scope.options.end_stay]
         },
 
-        // so is that why you want to be a comedian?
+        end_dankmeme3: {
+            text: "You both immediately crack up. You're laughing so hard, you almost fail to notice the bus that's arrived outside of the coffee shop.", type: "other-action",
+        },
 
-        // That, and the fact that I got rejected from med school
+        end_saybye: {
+            text: "Tobi smiles and agrees to talk again some other time. You wave goodbye as you run to the door.", type: "other-action",
+            options: [$scope.options.end_leave]
+        },
 
-        // well, my bus is here, time to go
-
-        // say goodbye
-
-        //You tell him you'll keep in touch on facebook.
-
+        end_stay: {
+            text: "Missing the bus again isn't a very good idea, especially considering how busy you are.", type: "other-action",
+            options: [$scope.options.end_saybye]
+        },
 
         // Explores both the simplicity and the effectiveness/greatness of laughter - how it is so universal - gr8 for a dying guy as much as someone who missed their bus.
         // contrasting two interactiosn between friends - and how they both share laughter
@@ -402,6 +445,17 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
                 $scope.userOptions = $scope.story[option.event[0]].options;
             }, 3 * ticks);
 
+        } else if (option.event.indexOf('desert_treat1') > -1 | option.event.indexOf('desert_treat2') > -1 | option.event.indexOf('desert_treat3') > -1) {
+            $timeout(function () {
+                delete $scope.treatments[option.id];
+                if (jQuery.isEmptyObject($scope.treatments)) {
+                    addEvent(['desert_desperate']);
+                    $scope.userOptions = $scope.story[option.event[0]].options;
+                } else {
+                    $scope.userOptions = $scope.treatments;
+                }
+                //console.log($scope.treatments);
+            }, 2 * ticks);
         } else if (option.event.indexOf('end') > -1) {
 
             $scope.$parent.storyTime = false;

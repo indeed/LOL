@@ -52,6 +52,19 @@
                 <div class="divider"></div>
                 <br>
                 <button style="margin-top:4px;" ng-audio="media/click.mp3" volume="0.25" start="0" class="hvr-sweep-to-right" ng-click="start()"><h5><i class="icon ion-android-send"></i>&nbsp;&nbsp; P L A Y</></h5></button>
+                <div class="credits-btn">
+                    credits<br>
+                    <div class="credits">
+                        An interactive site by Shun Yu Rao
+                        <br>
+                        <b>Music </b>
+                        <br>
+                        Bill Evans - My Foolish Heart<br>
+                        Louis Armstrong - La Vie en Rose<br>
+                        <b>Spcial thanks</b><br>Derek Xu
+                    </div>
+                </div>
+
             </div>
 
             <div class="container story-container" ng-hide="!storyTime" ng-controller="mainCtrl">
@@ -72,31 +85,37 @@
             </div>
         </div>
         <div class="end-container" ng-hide="!end">
-                <div class="center end-message">
-                    <h4 ng-hide="!(endMessage == 1)" class="end-message fadeout">
-                        It's still raining as you board the bus.
-                    </h4>
-                    <h4 ng-hide="!(endMessage == 2)" class="end-message fadeout">
-                        You shift uncomfortably in your rain soaked jacket.
-
-                        It's amazing how 
-                    </h4>
-                    <h4 ng-hide="!(endMessage == 3)" class="end-message fadeout">
-                        You shift uncomfortably in your rain soaked jacket.
-
-                        It's amazing how
-                    </h4>
-                    <h4 ng-hide="!(endMessage == 4)" class="end-message fadeout" style="font-style:italic">
-                        Laughter heals all wounds, and that's one thing that everybody shares. No matter what you're going through, it makes you forget about your problems. I think the world should keep laughing.
-                    </h4>
-                    <h4 ng-hide="!(endMessage == 5)" class="end-message fadeout">
-                        Share a laugh with a friend<br><b>It's free.</b>
-                        <br><br>
-                        <button ng-audio="media/click.mp3" volume="0.2" start="0" class="hvr-sweep-to-right" ng-click="reload()"><h4><i class="icon ion-android-refresh"></i></h4></button>
-                    </h4>
-                </div>
-
+            <div class="center end-message">
+                <h4 ng-hide="!(endMessage == 1)" class="end-message fadeout">
+                    It's still raining as you board the bus.
+                </h4>
+                <h4 ng-hide="!(endMessage == 2)" class="end-message fadeout">
+                    You slump into the seat and close your eyes for a moment.
+                </h4>
+                <h4 ng-hide="!(endMessage == 3)" class="end-message fadeout">
+                    You wonder how it's possible for happiness to cost literally nothing—furthermore, how such an abundant and inexpensive resource can be so underused.
+                </h4>
+                <h4 ng-hide="!(endMessage == 4)" class="end-message fadeout">
+                    As the coffee shop speeds out of view, you hope—for everyone's sake—that Tobi continues doing what he loves.
+                </h4>
+                <h4 ng-hide="!(endMessage == 5)" class="end-message fadeout" style="font-style:italic">
+                    Laughter heals all wounds, and that's one thing that everybody shares. No matter what you're going through, it makes you forget about your problems. I think the world should keep laughing.<br>— Kevin Hart
+                </h4>
+                <h4 ng-hide="!(endMessage == 6)" class="end-message fadeout">
+                    Share a laugh with a friend.<br><b>It's free.</b>
+                    <br><br>
+                    <button ng-audio="media/click.mp3" volume="0.2" start="0" class="hvr-sweep-to-right" ng-click="reload()"><h4><i class="icon ion-android-refresh"></i></h4></button>
+                    <button ng-audio="media/click.mp3" volume="0.2" start="0" class="hvr-sweep-to-right" ng-click="reload()"><h4><i class="icon ion-android-star"></i></h4></button>
+                </h4>
             </div>
+        </div>
+        <div class="start-container" ng-hide="noStartText">
+            <div class="center end-message">
+                <h4 class="end-message">
+                    Please enable your volume for best experience.<br><i style="font-size:5em;" class="icon ion-volume-high"></i>
+                </h4>
+            </div>
+        </div>
     </div>
 </body>
 

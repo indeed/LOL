@@ -122,6 +122,11 @@ button {
     font-style: italic;
 }
 
+.event .columns.treatment {
+    text-align: center !important;
+    font-weight:600;
+}
+
 .event .columns.other-speech {
     text-align: left !important;
     font-weight: 600;
@@ -220,4 +225,36 @@ button {
 .fadeout.ng-hide-add,
 .fadein.ng-hide-remove.ng-hide-remove-active {
     opacity: 1;
+}
+
+.start-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    background: rgba(0,0,0,0.8);
+    color: #fff;
+}
+
+.start-container.ng-hide {
+    -webkit-animation: fadeOut 1s;
+    animation: fadeOut 1s;
+}
+
+.credits {
+    display:none;
+    animation: fadeOutDown 1s;
+}
+
+.credits-btn {
+    line-height: 1.3em !important;
+    animation: fadeInDown 2s;
+}
+
+.credits-btn:hover .credits{
+    line-height: 1em;
+    display:initial;
+    animation: fadeInDown 1s;
 }
