@@ -136,7 +136,7 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
         end_condolences: { name: "Offer your condolences", event: ['end_condolences', 'end_itsok1', 'end_itsok2', 'end_itsok3'] },
         end_silent: { name: "Stay silent", event: ['end_silent', 'end_itsok1', 'end_itsok2', 'end_itsok3'] },
 
-        end_reflect: { name: "Reflect on Tobi's career choice", event: ['end_reflect', 'end_reflect2'] },
+        end_reflect: { name: "Reflect on Tianze's career choice", event: ['end_reflect', 'end_reflect2'] },
 
         end_dankmeme: { name: "Joke about med school", event: ['end_dankmeme', 'end_dankmeme2', 'end_dankmeme3'] },
           
@@ -188,7 +188,7 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
         },
 
         meet_friendcall2: {
-            text: "Hey! Remember me? It's Tobi from high school!", type: "other-speech",
+            text: "Hey! Remember me? It's Tianze from high school!", type: "other-speech",
         },
 
         meet_ignorecall: {
@@ -201,7 +201,7 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
         },
 
         meet_walkover: {
-            text: "You walk over and meet the man. Tobi doesn't look like he's changed much from high school. Though it's been ten years, you could recognize that beaming smile anywhere.", type: "other-action",
+            text: "You walk over and meet the man. Tianze doesn't look like he's changed much from high school. Though it's been ten years, you could recognize that beaming smile anywhere.", type: "other-action",
             options: [$scope.options.meet_asklife, $scope.options.meet_askgrad]
         },
 
@@ -338,7 +338,7 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
         },
 
         end_condolences: {
-            text: "You offer Tobi your genuine condolences for the loss of his friend.", type: "other-action",
+            text: "You offer Tianze your genuine condolences for the loss of his friend.", type: "other-action",
             options: [$scope.options.end_reflect]
         },
 
@@ -360,7 +360,7 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
         },
 
         end_reflect: {
-            text: "You wonder out loud if he does comedy for the same reason he made his last words to his friend a joke. Tobi grins.", type: "other-action",
+            text: "You wonder out loud if he does comedy for the same reason he made his last words to his friend a joke. Tianze grins.", type: "other-action",
             options: [$scope.options.end_dankmeme]
         },
 
@@ -383,7 +383,7 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
         },
 
         end_saybye: {
-            text: "Tobi smiles and agrees to talk again some other time. You wave goodbye as you run to the door.", type: "other-action",
+            text: "Tianze smiles and agrees to talk again some other time. You wave goodbye as you run to the door.", type: "other-action",
             options: [$scope.options.end_leave]
         },
 
