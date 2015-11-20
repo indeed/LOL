@@ -1,6 +1,6 @@
 ﻿var app = angular.module('lol', ['ui.router', 'ngVidBg', 'ngAudio', 'ngAnimate', 'lol.directives']);
 
-var ticks = 10;
+var ticks = 1000;
 
 //TO ADD
 // joke enter
