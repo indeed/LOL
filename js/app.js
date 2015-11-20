@@ -132,7 +132,7 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
         desert_end: { name: "Finish story", event: ['backToCafe'] },
 
         // Back to Cafe
-        end_ask: { name: "Ask about what happened to José", event: ['end_ask', 'end_rip1', 'end_rip2','end_rip3'] },
+        end_ask: { name: "Ask about what happened to Emilio", event: ['end_ask', 'end_rip1', 'end_rip2','end_rip3'] },
         end_condolences: { name: "Offer your condolences", event: ['end_condolences', 'end_itsok1', 'end_itsok2', 'end_itsok3'] },
         end_silent: { name: "Stay silent", event: ['end_silent', 'end_itsok1', 'end_itsok2', 'end_itsok3'] },
 
@@ -231,7 +231,7 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
 
         // Desert
         goToDesert: {
-            text: "Back then, I still didn't know what to do with my life. This one summer, I planned a desert road trip with José—he's a guy I knew from Muay Thai. So we're on an empty backroad somewhere in Arizona, and I realise that I didn't bring enough water.", type: "other-action",
+            text: "Back then, I still didn't know what to do with my life. This one summer, I planned a desert road trip with Emilio—he's a guy I knew from Muay Thai. So we're on an empty backroad somewhere in Arizona, and I realise that I didn't bring enough water.", type: "other-action",
             options: [$scope.options.desert_keepgoing, $scope.options.desert_turnback]
         },
 
@@ -246,7 +246,7 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
         },
 
         desert_start_walk: {
-            text: "José and I disagree on what to do, so we end up flipping a coin to determine whether or not we go back. The coin doesn't matter in the end, the damn car engine fails. There's no reception out here either. Time to walk.", type: "other-action",
+            text: "Emilio and I disagree on what to do, so we end up flipping a coin to determine whether or not we go back. The coin doesn't matter in the end, the damn car engine fails. There's no reception out here either. Time to walk.", type: "other-action",
         },
 
         desert_walk: {
@@ -260,17 +260,17 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
         },
 
         desert_walk_investigate: {
-            text: "I turn around and see José clutching his leg. He slouches down on the sandy ground, paler than usual. A dark shape slithers off into the brush.", type: "other-action",
+            text: "I turn around and see Emilio clutching his leg. He slouches down on the sandy ground, paler than usual. A dark shape slithers off into the brush.", type: "other-action",
             options: [$scope.options.desert_helpfriend, $scope.options.desert_freakout]
         },
 
         desert_freakout: {
-            text: "I am about to completely freak out and panic—however, it occurs to me that I didn't even know what was wrong. I calmly walk over to help José out.", type: "other-action",
+            text: "I am about to completely freak out and panic—however, it occurs to me that I didn't even know what was wrong. I calmly walk over to help Emilio out.", type: "other-action",
             options: [$scope.options.desert_closerlook]
         },
 
         desert_helpfriend: {
-            text: "I walk over to figure out the problem. If my intuition is right, another sharp pebble has found its way into José's shoe.", type: "other-action",
+            text: "I walk over to figure out the problem. If my intuition is right, another sharp pebble has found its way into Emilio's shoe.", type: "other-action",
             options: [$scope.options.desert_closerlook]
         },
 
@@ -303,12 +303,12 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
         },
 
         desert_telljoke: {
-            text: "José looks at me quite puzzledly. I take a deep breath.", type: "other-action",
+            text: "Emilio looks at me quite puzzledly. I take a deep breath.", type: "other-action",
             options: [$scope.options.desert_end]
         },
 
         desert_telljoke2: {
-            text: "I thought I was hilarious at the time. I don't remember what I said anymore—maybe it's better that way. Well, for a few seconds, José just stares at me—", type: "other-action",
+            text: "I thought I was hilarious at the time. I don't remember what I said anymore—maybe it's better that way. Well, for a few seconds, Emilio just stares at me—", type: "other-action",
         },
 
         desert_telljoke3: {
@@ -356,7 +356,7 @@ app.controller('mainCtrl', function ($scope, $timeout, ngAudio) {
         },
 
         end_itsok3: {
-            text: "—I'm sure José would have agreed.", type: "other-speech",
+            text: "—I'm sure Emilio would have agreed.", type: "other-speech",
         },
 
         end_reflect: {
