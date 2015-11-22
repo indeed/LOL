@@ -37,7 +37,7 @@
 <body ng-app="lol">
     <div ng-controller="titleCtrl">
         <div class="bg-video" ng-class="{blur: blur}" ng-hide="desertScene">
-            <vid-bg prevent-right-click resources="bg.main" poster="bg.postermain" full-screen="bg.fullScreen" muted="bg.muted" z-index="bg.zIndex" play-info="bg.playInfo" pause-play="bg.pausePlay" loop="true"></vid-bg>
+            <vid-bg style="min-width:100%; height: auto;" prevent-right-click resources="bg.main" poster="bg.postermain" full-screen="bg.fullScreen" muted="bg.muted" z-index="bg.zIndex" play-info="bg.playInfo" pause-play="bg.pausePlay" loop="true"></vid-bg>
         </div>
 
         <div class="bg-video" ng-class="{blur: desertBlur}" ng-hide="!desertScene">

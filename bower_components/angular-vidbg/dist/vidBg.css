@@ -9,13 +9,12 @@ video.vidBg-fade {
 }
 
 video.vidBg-fullScreen {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+        min-width: 100%;
+
 }
 
 video.vidBg-autoWidth {

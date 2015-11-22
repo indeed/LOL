@@ -47,6 +47,7 @@ button {
     -webkit-animation: flipInX 2s;
     animation: flipInX 2s;
     text-align: center;
+    height:100vh;
 }
 
     .title-container.ng-hide {
@@ -173,6 +174,7 @@ button {
 .bg-video {
     -webkit-animation: fadeIn 3s;
     animation: fadeIn 3s;
+    height:100vh;
 }
 
     .bg-video.ng-hide {
