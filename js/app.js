@@ -33,8 +33,11 @@ app.controller('titleCtrl', function ($scope, $timeout, $window, ngAudio) {
     $scope.bg = {
         main: [
             'media/titlebg.webm',
+            'media/titlebg.mp4',
         ],
-        desert: ['media/desertbg.webm',
+        desert: [
+            'media/desertbg.webm',
+            'media/desertbg.mp4',
         ],
         postermain: 'media/titlebg.jpg',
         posterdesert: 'media/desertbg.jpg',

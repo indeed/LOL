@@ -36,13 +36,17 @@
 
 <body ng-app="lol">
     <div ng-controller="titleCtrl">
-        <div class="bg-video" ng-class="{blur: blur}" ng-hide="desertScene">
-            <vid-bg style="min-width:100%; height: auto;" prevent-right-click resources="bg.main" poster="bg.postermain" full-screen="bg.fullScreen" muted="bg.muted" z-index="bg.zIndex" play-info="bg.playInfo" pause-play="bg.pausePlay" loop="true"></vid-bg>
-        </div>
 
-        <div class="bg-video" ng-class="{blur: desertBlur}" ng-hide="!desertScene">
-            <vid-bg prevent-right-click resources="bg.desert" poster="bg.posterdesert" full-screen="bg.fullScreen" muted="bg.muted" z-index="bg.zIndex" play-info="bg.playInfo" pause-play="bg.pausePlay" loop="true"></vid-bg>
-        </div>
+
+        <video ng-class="{blur: blur}" ng-hide="desertScene" class="bg-video" autoplay loop poster="polina.jpg">
+            <source src="media/titlebg.webm" type="video/webm">
+            <source src="media/titlebg.mp4" type="video/mp4">
+        </video>
+
+        <video class="bg-video" ng-class="{blur: desertBlur}" ng-hide="!desertScene" autoplay loop poster="polina.jpg">
+            <source src="media/desertbg.webm" type="video/webm">
+            <source src="media/desertbg.mp4" type="video/mp4">
+        </video>
 
         <div id="content" ng-hide="!loaded" elem-ready="load()">
             <div class="container center title-container" ng-hide="started">
